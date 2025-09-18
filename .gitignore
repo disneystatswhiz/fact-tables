@@ -1,0 +1,38 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+
+# Julia
+.julia/
+*.ji
+Manifest.toml  # optional; keep if you want exact deps pinned
+*.jl.cov
+*.jl.mem
+
+# Project artifacts
+work/
+input/
+output/
+temp/
+already_on_s3/
+logs/
+*.log
+
+# Data files (avoid committing large data)
+*.parquet
+*.feather
+*.arrow
+*.csv
+*.tsv
+
+# Allow small curated samples if you want:
+!samples/**
