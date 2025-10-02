@@ -1,8 +1,16 @@
 import os
 import subprocess
 import time
+import shutil
 
 def run_scripts_in_order():
+
+    # Delete the input and work directories to ensure clean slate
+    if os.path.exists("input"):
+        shutil.rmtree("input")
+    if os.path.exists("work"):
+        shutil.rmtree("work")
+
     # List all files in the current directory
     files = os.listdir(".")
 
