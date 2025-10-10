@@ -11,25 +11,18 @@ def run_scripts_in_order():
     if os.path.exists("work"):
         shutil.rmtree("work")
 
-    # List all files in the current directory
-    files = os.listdir(".")
-
-    # Filter only Python scripts that start with 01 through 08
-    scripts = [f for f in files if f.endswith(".py") and f[:2].isdigit() and 1 <= int(f[:2]) <= 8]
-
-    # Sort scripts by their numeric prefix
-    scripts.sort()
-
     start_time = time.perf_counter()
 
-    # Run each script
-    for script in scripts:
-        print(f"Running {script}...")
-        subprocess.run(["python", script], check=True)
+    # Run report.py
+    subprocess.run(["python", "report.py"], check=True)
+    # Run update.py
+    subprocess.run(["python", "update.py"], check=True)
+    # Run get.py
+    subprocess.run(["python", "get.py"], check=True)
 
     end_time = time.perf_counter()
     elapsed_minutes = (end_time - start_time) / 60
-    print(f"\n✅ Updated wait time fact table in {elapsed_minutes:.1f} minutes.")
+    print(f"\n[OK] Updated wait_time_fact_table in {elapsed_minutes:.1f} minutes.\n")
 
 if __name__ == "__main__":
     run_scripts_in_order()

@@ -21,3 +21,6 @@ df.year = parse.(Int, first.(string.(df.observed_at), 4))
 
 # Count of rows by year
 year_counts = combine(groupby(df, :year), nrow => :count)
+
+# sort df by observed_at
+sort!(df, :observed_at, rev=true)
