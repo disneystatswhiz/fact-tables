@@ -24,3 +24,6 @@ year_counts = combine(groupby(df, :year), nrow => :count)
 
 # sort df by observed_at
 sort!(df, :observed_at, rev=true)
+
+# Get all rows for a specific entity_code
+filtered_rows = df[df.entity_code .== "MK25", :]

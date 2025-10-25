@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-09_update_from_list.py
+update.py
 ----------------------
-STEP 2/2: Incrementally update the Wait Time FACT TABLE using a CSV produced by 08_report_daily.py.
+STEP 2/2: Incrementally update the Wait Time FACT TABLE using a CSV produced by report.py.
 
 Process
 -------
-1) Read local CSV of "needs processing" S3 keys (from 08_report_daily.py).
+1) Read local CSV of "needs processing" S3 keys (from report.py).
 2) Download the current fact-table parquet from S3 and stream its rows into a new parquet,
    indexing PKs in a disk-backed SQLite DB to enforce append-only de-dup.
 3) Parse each listed S3 source file into the 4-column schema:
@@ -22,7 +22,7 @@ Assumes:
 - boto3, pandas, pyarrow, sqlite3 available; AWS creds configured.
 
 Usage example:
-python 09_update_from_list.py \
+python update.py \
   --bucket touringplans_stats \
   --fact-key stats_work/fact_tables/wait_time_fact_table.parquet \
   --list-csv work/needs_processing_YYYYMMDD.csv \

@@ -17,8 +17,8 @@ def run_scripts_in_order():
     subprocess.run(["python", "report.py"], check=True)
     # Run update.py
     subprocess.run(["python", "update.py"], check=True)
-    # Run get.py
-    subprocess.run(["python", "get.py"], check=True)
+    # Run latest.py
+    subprocess.run(["python", "latest.py"], check=True)
 
     end_time = time.perf_counter()
     elapsed_minutes = (end_time - start_time) / 60
