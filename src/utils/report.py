@@ -21,15 +21,18 @@ python 08_report_daily.py \
 
 from __future__ import annotations
 import os
-import sys
 import argparse
 import csv
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Iterable, List, Optional, Tuple
-
 import boto3
 from botocore.exceptions import ClientError
+import sys
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 # immediate logs in Git Bash / terminals
 try:
