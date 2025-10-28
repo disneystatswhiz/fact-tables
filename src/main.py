@@ -17,7 +17,7 @@ LOG_DIR   = ROOT_DIR / "logs"
 # --- Logging ---
 def setup_logging() -> Path:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
-    log_path = LOG_DIR / f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    log_path = LOG_DIR / f"fact_table.log"
     fmt = "%(asctime)s | %(levelname)-8s | %(message)s"
     datefmt = "%Y-%m-%d %H:%M:%S"
     logging.basicConfig(

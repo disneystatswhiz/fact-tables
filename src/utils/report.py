@@ -119,7 +119,7 @@ def compute_needs_processing(recent: List[S3Obj], fact_obj: Optional[S3Obj]) -> 
     if not recent:
         return []
     if not fact_obj:
-        return recent[:]  # no fact table yet → everything recent needs processing
+        return recent[:]  # no fact table yet -> everything recent needs processing
     return [o for o in recent if o.last_modified > fact_obj.last_modified]
 
 
@@ -179,7 +179,7 @@ def render_report(
     cutoff_48 = datetime.now(timezone.utc) - timedelta(hours=very_stale_hours)
 
     if recent:
-        lines = [f"*Recent source files (newest → oldest, window ≤ {len(set([r.last_modified.date() for r in recent]))} day(s))*"]
+        lines = [f"*Recent source files (newest -> oldest, window ≤ {len(set([r.last_modified.date() for r in recent]))} day(s))*"]
         for o in recent:
             flag = ""
             if is_current_non_test(o.key):

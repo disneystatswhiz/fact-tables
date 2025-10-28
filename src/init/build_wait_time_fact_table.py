@@ -13,9 +13,9 @@ What it does:
   2) Lists all priority CSVs under s3://touringplans_stats/export/fastpass_times/{prop}/
   3) Parses to the 4-column long form (04_parse rules), with compact-time guard for priority.
      Also ensures observed_at always has a timezone offset based on S3 path:
-       - DLR → America/Los_Angeles
-       - TDR → Asia/Tokyo
-       - else → America/New_York (Orlando)
+       - DLR -> America/Los_Angeles
+       - TDR -> Asia/Tokyo
+       - else -> America/New_York (Orlando)
   4) De-dupes across all 4 columns via SQLite PK.
   5) Streams Parquet + uploads to s3://touringplans_stats/stats_work/fact_tables/
      and uploads a 1,000-row sample CSV to the same folder.
@@ -159,8 +159,8 @@ PRIO_COLS = ["FATTID","FDAY","FMONTH","FYEAR","FHOUR","FMIN","FWINHR","FWINMIN"]
 
 def _split_hhmm_or_hhmmss_to_hour_min(x: pd.Series) -> tuple[pd.Series, pd.Series]:
     """
-    Accept ints/strings like 23, 2318, 231801 → (hour, minute).
-    Non-numeric → NaN.
+    Accept ints/strings like 23, 2318, 231801 -> (hour, minute).
+    Non-numeric -> NaN.
     """
     v = pd.to_numeric(x, errors="coerce")
     h = pd.Series(pd.NA, index=v.index, dtype="Int64")
@@ -205,7 +205,7 @@ def _normalize_priority_compact_times(df: pd.DataFrame) -> pd.DataFrame:
 def _priority_rows_to_minutes(df: pd.DataFrame) -> pd.Series:
     """
     Compute minutes_until_return with:
-      • sellout if FWINHR >= 8000 → 8888
+      • sellout if FWINHR >= 8000 -> 8888
       • rollover +1 day if (return - observed) < -15 minutes
     Works with compact FHOUR/FMIN, FWINHR/FWINMIN after normalization.
     """
@@ -320,13 +320,13 @@ def _prop_from_key(key: str) -> str:
     return ""
 
 def _zone_from_key(key: str) -> ZoneInfo:
-    """Map property → ZoneInfo (DLR=LA, TDR=Tokyo, else Orlando)."""
+    """Map property -> ZoneInfo (DLR=LA, TDR=Tokyo, else Orlando)."""
     prop = _prop_from_key(key)
     if prop == "dlr":
         return ZoneInfo("America/Los_Angeles")
     if prop == "tdr":
         return ZoneInfo("Asia/Tokyo")
-    # wdw / uor / ush / unknown → Orlando
+    # wdw / uor / ush / unknown -> Orlando
     return ZoneInfo("America/New_York")
 
 def ensure_observed_at_has_offset(df: pd.DataFrame, tz: ZoneInfo) -> pd.DataFrame:

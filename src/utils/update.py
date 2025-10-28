@@ -123,7 +123,7 @@ def _zone_from_key(key: str) -> ZoneInfo:
         return ZoneInfo("America/Los_Angeles")
     if prop == "tdr":
         return ZoneInfo("Asia/Tokyo")
-    # wdw / uor / ush / unknown → Orlando
+    # wdw / uor / ush / unknown -> Orlando
     return ZoneInfo("America/New_York")
 
 def ensure_observed_at_has_offset(df: pd.DataFrame, tz: ZoneInfo) -> pd.DataFrame:

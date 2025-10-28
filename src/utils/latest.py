@@ -144,7 +144,7 @@ def main():
         print(f"[INFO] processed row group {i+1}/{pf.num_row_groups} (unique entities so far: {len(latest_by_entity):,})")
 
     if not latest_by_entity:
-        # Table present but empty → publish empty CSV (harmless)
+        # Table present but empty -> publish empty CSV (harmless)
         pd.DataFrame(columns=["entity_code", "latest_observation_date"]).to_csv(local_csv, index=False)
         upload_file_to_s3(s3, local_csv, args.bucket, args.out_key)
         print(f"[SUCCESS] Wrote empty latest_obs_report to s3://{args.bucket}/{args.out_key}")
