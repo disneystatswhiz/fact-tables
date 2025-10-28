@@ -6,6 +6,15 @@ import logging
 from pathlib import Path
 from datetime import datetime
 import time
+import os
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+try:
+    # Make this process’ stdout/stderr UTF-8 regardless of host code page
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 # --- Paths ---
 ROOT_DIR  = Path(__file__).resolve().parents[1]   # .../fact-tables
